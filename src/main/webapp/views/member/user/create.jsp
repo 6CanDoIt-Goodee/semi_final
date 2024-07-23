@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <style>
-	@font-face {
+    @font-face {
 	    font-family: 'JalnanGothic';
 	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
 	    font-weight: normal;
@@ -30,7 +30,7 @@
         margin-top: -50px; 
     }
 
-    #main_logo {
+        #main_logo {
         font-size: 33px;
         color: rgb(224, 195, 163);
         text-decoration: none;
@@ -234,10 +234,10 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     if (xhr.responseText === "duplicate") {
-                        alert("중복된 아이디입니다.");
+                        alert("중복된 아이디입니다.                                                             설정한 아이디는 나중에 변경할수 없으니 신중히 입력해주세요.");
                     } else if (xhr.responseText === "available") {
-                        alert("사용 가능한 아이디입니다.");
-                    }
+                        alert("사용 가능한 아이디입니다.                                                      설정한 아이디는 나중에 변경할수 없으니 신중히 입력해주세요.");
+                    } 
                 }
             };
             xhr.send("id=" + encodeURIComponent(id));

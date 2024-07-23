@@ -3,15 +3,15 @@ package com.book.member.user.dao;
 import static com.book.common.sql.JDBCTemplate.close;
 import static com.book.common.sql.JDBCTemplate.getConnection;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.book.member.user.vo.User;
+
 
 
 
@@ -40,6 +40,29 @@ public class UserDao {
         return count;
     }
 	
+	public int isNicknameExists(String nickname) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection conn = getConnection();
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) AS count FROM `users` WHERE `user_nickname` = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, nickname);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn);
+            close(rs);
+            close(pstmt);
+        }
+        return count;
+    }
+	
 	public int createUser(User u) {
         PreparedStatement pstmt = null;
         Connection conn = getConnection();
@@ -50,6 +73,12 @@ public class UserDao {
             if (emailCount >= 3) {
                 return -1; 
             }
+            
+            int nicknameCount = isNicknameExists(u.getUser_nickname());
+            if (nicknameCount > 0) {
+                return -2;
+            }
+            
             String sql = "INSERT INTO `users`(user_name, user_id, user_pw, user_email, user_nickname) VALUES(?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, u.getUser_name());
@@ -192,6 +221,29 @@ public class UserDao {
 		return u;
 	}
 	
+	public int check_delete(String name) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection conn = getConnection();
+        int count = 0;
+        try {
+            String sql = "SELECT `user_active` AS count FROM `users` WHERE `user_name` = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(conn);
+            close(rs);
+            close(pstmt);
+        }
+        return count;
+    }
+	
 	public User findpw(String id,String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -213,7 +265,6 @@ public class UserDao {
 						rs.getString("user_nickname"),
 						rs.getInt("user_active"),
 						rs.getTimestamp("user_create").toLocalDateTime());
-				System.out.println("dao");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -230,6 +281,16 @@ public class UserDao {
 		Connection conn =getConnection();
 		int result = 0;
 		try {
+			 int emailCount = getEmailCount(email);
+		        if (emailCount >= 4) {
+		            return -1; 
+		        }
+
+		        // 닉네임 중복 여부 확인
+		        int nicknameCount = isNicknameExists(nickname);
+		        if (nicknameCount > 0) {
+		            return -2; 
+		        }
 			String sql = "UPDATE `users` set user_pw=?,user_email=?, user_name=?,user_nickname=? WHERE user_no=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,pw);
@@ -272,7 +333,8 @@ public class UserDao {
         Connection conn = getConnection();
         List<User> resultList =new ArrayList<User>();
         try {
-        String sql = "SELECT * FROM `users` WHERE `user_name` = ? AND `user_email` = ?";
+        	
+        String sql = "SELECT * FROM `users` WHERE `user_name` = ? AND `user_email` = ? AND `user_active` != 0";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, name);
         pstmt.setString(2, email);
@@ -360,34 +422,68 @@ public class UserDao {
 		}
 		return result;
 	}
-	public List<Map<String, Object>> getAllUsers() {
-        Connection conn = getConnection();
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        List<Map<String, Object>> users = new ArrayList<>();
-        try {
-        	String sql = "SELECT * FROM `users`";
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Map<String, Object> userMap = new HashMap<>();
-                userMap.put("user_no", rs.getInt("user_no"));
-                userMap.put("user_name", rs.getString("user_name"));
-                userMap.put("user_id", rs.getString("user_id"));
-                userMap.put("user_pw", rs.getString("user_pw"));
-                userMap.put("user_email", rs.getString("user_email"));
-                userMap.put("user_nickname", rs.getString("user_nickname"));
-                userMap.put("user_active", rs.getInt("user_active"));
-                userMap.put("user_create", rs.getTimestamp("user_create").toLocalDateTime());
-                users.add(userMap);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(conn);
-            close(rs);
-            close(pstmt);
-        }
-        return users;
-    }
+	// limit 걸어주는 코드
+	public List<User> selectBoardList(User u, String order) {
+	    List<User> list = new ArrayList<User>();
+	    Connection conn = getConnection();
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    try {
+	        String sql = "SELECT * FROM users";
+	        if (u.getUser_name() != null && !u.getUser_name().isEmpty()) {
+	            sql += " WHERE user_name LIKE CONCAT('%','"+u.getUser_name()+"', '%')";
+	        }
+	        if (order != null && !order.isEmpty()) {
+	        	sql += " ORDER BY " +
+	                    "CAST(REGEXP_REPLACE(" + order + ", '[^0-9]', '') AS UNSIGNED), " +
+	                    order + " ASC";
+	         }
+	        sql += " LIMIT " + u.getLimitPageNo() + ", " + u.getNumPerPage();
+
+	        
+	        pstmt = conn.prepareStatement(sql);
+	        rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            User user = new User(rs.getInt("user_no"),
+	                    rs.getString("user_name"),
+	                    rs.getString("user_id"),
+	                    rs.getString("user_pw"),
+	                    rs.getString("user_email"),
+	                    rs.getString("user_nickname"),
+	                    rs.getInt("user_active"),
+	                    rs.getTimestamp("user_create").toLocalDateTime());
+	            list.add(user);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return list;
+	}
+
+	public int selectBoardCount(User u) {
+	    int result = 0;
+	    Connection conn = getConnection();
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    try {
+	        String sql = "SELECT COUNT(*) AS cnt FROM users";
+	        if (u.getUser_name() != null && !u.getUser_name().isEmpty()) {
+	            sql += " WHERE user_name LIKE CONCAT('%','"+u.getUser_name()+"', '%')";
+	        }
+	        pstmt = conn.prepareStatement(sql);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            result = rs.getInt("cnt");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+	    return result;
+	}
 }

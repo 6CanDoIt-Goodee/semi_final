@@ -81,7 +81,7 @@
             box-sizing: border-box;
             margin: 0;
         }
-
+		
         body {
             background-color: rgb(247, 247, 247);
         }
@@ -90,8 +90,8 @@
             font-size: 30px;
             color: rgb(224, 195, 163);
             text-decoration: none;
-            font-family: 'JalnanGothic';
-            background-color: rgb(255, 255, 255);
+            font-family: 'JalnanGothic'; 
+            padding-left: 15px;
         }
 
         .main_logo:hover {
@@ -194,6 +194,7 @@
 		.notification-icon {
 		    position: relative;
 		    cursor: pointer;
+		    padding-top: 5px;
 		}
 		
 		.notification-count {
