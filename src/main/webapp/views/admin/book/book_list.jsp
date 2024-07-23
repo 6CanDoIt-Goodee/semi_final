@@ -105,6 +105,8 @@
                         <th>저자</th>
                         <th>출판사</th>
                         <th>카테고리</th>
+                         <th>수정</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,6 +120,16 @@
                                 <td><%= row.get("books_author") %></td>
                                 <td><%= row.get("books_publisher_name") %></td>
                                 <td><%= row.get("books_category") %></td>
+                               <td><form action="/book/bookCheck" method="post">
+										<input type="hidden" name="books_no" value="<%= row.get("books_no") %>">
+	                                	<input type="submit" value="수정">
+	                                </form>
+                              	</td>
+                                <td><form action="/book/delete" method="post">
+		                            	<input type="hidden" name="books_no" value="<%= row.get("books_no") %>">
+		                            	<input type="submit" value="삭제" onclick= "delect_list()">
+		                            </form>
+	                           </td>
                             </tr>
                         <% }
                        } else { %>
