@@ -3,6 +3,7 @@ package com.book.member.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,15 +30,18 @@ public class UserChangepwEndServlet extends HttpServlet {
       String id = (String) session.getAttribute("user_id");
       String pw = request.getParameter("pw");
       int result = new UserDao().changepw(id,pw);
-      System.out.println("id는?"+id);
-      System.out.println(pw);
+      RequestDispatcher dispatcher = null;
+     
       if(result > 0) {
-         response.sendRedirect("/views/member/user/changepw_success.jsp");
+         session.removeAttribute("user");
+         session.invalidate();
+         dispatcher = request.getRequestDispatcher("/");
       }else {
-         writer.println("<script>alert('변경실패 다시 시도해주세요.');location.href='/views/member/user/changepw.jsp';</script>");
+         writer.println("<script>alert('변경실패 다시 시도해주세요.');location.href='/user/findpw';</script>");
            writer.flush(); 
            return;
       }
+      dispatcher.forward(request, response);
    }
       
 

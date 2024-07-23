@@ -128,7 +128,7 @@
                     <input type="text" oninput="validateId()" name="id" id="id" placeholder="아이디를 입력해주세요." style="width: 500px;">
                     <input type="button" value="아이디 중복 확인" onclick="checkId();">
                 </div>
-                <span id="tooltipText" style="font-size: 10px;color: red; position: relative; top: -15px; left: 140px;">길이가 8~16자이며 첫 글자가 영문자인 영문자 숫자 문자열만 사용 가능합니다.</span>
+               <span id="tooltip-text" style="font-size: 10px;color: red; position: relative; top: -15px; left: 140px;">길이가 8~16자리 이하의 영문 대/소문자, 숫자, 특수문자(@$!%*?&)만 사용 가능합니다.</span>
                 <div class="form-group">
                     <label for="pw">비밀번호</label>
                     <input type="password" oninput="validatePassword()" placeholder="비밀번호를 입력해주세요." id="pw" name="pw" style="width: 500px;">

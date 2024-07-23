@@ -202,8 +202,8 @@
       
       /* 댓글 */
       
-      .container {
-         width: 900px;
+      .replyContainer {
+         width: 800px;
          margin: auto;
          overflow: hidden;
          padding: 20px;
@@ -388,7 +388,7 @@
     </section>
      
    <!-- 댓글 컨테이너 -->
-   <section class="container">
+   <section class="replyContainer">
        <% Integer replyCnt = (Integer) request.getAttribute("erReplyCnt"); %>
        <div id="replyCount">댓글 수 : <%= (replyCnt != null ? replyCnt : 0) %></div><br>
        
@@ -446,6 +446,7 @@
                <% } %>
            </form>
            <!-- 삭제 폼 -->
+          <% if (userNo == replyUserNo && !ver.get("er_delete").equals("1")) { %>
            <form action="/member/event/deleteReply" method="post" style="display: inline;">
                <input type="hidden" name="event_no" value="<%= event.getEvent_no() %>">
                <input type="hidden" name="eventType" value="<%= event.getEv_form() %>">
@@ -453,7 +454,6 @@
                <input type="hidden" name="er_user_no" value="<%= userNo %>">
                <!-- 로그인한 유저와 댓글을 등록한 유저의 번호가 같거나 // 댓글이 삭제가 안되었을 경우 
                     버튼이 보이도록 -->
-               <% if (userNo == replyUserNo && !ver.get("er_delete").equals("1")) { %>
                    <div class="btn_gr">
                        <input type="button" id="change_<%= erReplyNo %>" class="replyBtns" value="수정" onclick="changeReplyForm('<%= erReplyNo %>')">
                        <input class="replyBtns" type="submit" id="delete_<%= erReplyNo %>" value="삭제">
@@ -659,9 +659,9 @@
         
         /* 댓글 */
         function showReplyForm(replyId) {
-           document.getElementById('change_' + replyId).style.display = 'none';
-           document.getElementById('delete_' + replyId).style.display = 'none';
           document.getElementById('replyForm_' + replyId).style.display = 'block';
+           document.getElementById('delete_' + replyId).style.display = 'none';
+           document.getElementById('change_' + replyId).style.display = 'none';
       }
       
       function hideReplyForm(replyId) {

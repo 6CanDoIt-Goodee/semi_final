@@ -45,14 +45,14 @@ public class UserFindPwEndServlet extends HttpServlet {
                     return;
                 }
                 session.setAttribute("user_id", user.getUser_id());
-                response.sendRedirect("/views/user/changepw.jsp");
+                response.sendRedirect("/views/member/user/changepw.jsp");
             } else {
-               writer.println("<script>alert('아이디 또는 이메일이 잘못 되었습니다.                                     아이디와 이메일을 정확히 입력해 주세요.');location.href='/views/user/findpw.jsp';</script>");
+               writer.println("<script>alert('아이디 또는 이메일이 잘못 되었습니다.                                     아이디와 이메일을 정확히 입력해 주세요.');location.href='/views/member/user/findpw.jsp';</script>");
                 writer.flush();
                 return;
             }
         } else {
-           writer.println("<script>alert('아이디 또는 이메일이 잘못 되었습니다.                                     아이디와 이메일을 정확히 입력해 주세요.');location.href='/views/user/findpw.jsp';</script>");
+           writer.println("<script>alert('아이디 또는 이메일이 잘못 되었습니다.                                     아이디와 이메일을 정확히 입력해 주세요.');location.href='/views/member/user/findpw.jsp';</script>");
             writer.flush();
             return;
         }

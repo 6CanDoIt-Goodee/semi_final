@@ -6,25 +6,32 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%> 
 <%@ page import="com.book.member.user.vo.User"%>
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>사용자 이벤트 참여 내역</title>
-<style>  
+<style>   
+
+.container {
+    width: 100%;
+    max-width: 1300px;  
+    margin: 0 auto;
+} 
     body {
         background-color: rgb(247, 247, 247);
         -ms-overflow-style: none;
     }
     ::-webkit-scrollbar {
-	  display: none;
-	}
+     display: none;
+   }
     
     .word h3 {
         font-family: 'LINESeedKR-Bd';
         margin: 30px 0px;
         text-align: center;
-        font-size: 30px;
+        font-size: 2vw;
+    }
+    #list_empty{
+       font-size : 1.4vw;
     }
     .event_list_table {
         margin-top: 30px;
@@ -68,52 +75,55 @@
     }
     
     .search-container {
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	    margin-bottom: 20px;
-	}
-	
-	.search-form {
-	    display: flex;
-	    flex-grow: 1;
-	    margin-right: 10px;
-	}
-	
-	.search-input {
-	    flex-grow: 1;
-	    padding: 10px;
-	    font-size: 16px;
-	    border: 1px solid #ccc;
-	    border-radius: 4px 0 0 4px;
-	}
-	
-	.search-button,
-	.all-button {
-	    padding: 10px 20px;
-	    font-size: 16px;
-	    color: #fff;
-	    background-color: #6c757d;
-	    border: none;
-	    cursor: pointer;
-	    transition: background-color 0.3s ease;
-	}
-	
-	.search-button {
-	    border-radius: 0 4px 4px 0;
-	}
-	
-	.all-button {
-	    border-radius: 4px;
-	}
-	
-	.search-button:hover,
-	.all-button:hover {
-	    background-color: #5a6268;
-	}
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 20px;
+   }
+   
+   .search-form {
+       display: flex;
+       flex-grow: 1;
+       margin-right: 10px;
+   }
+   
+   .search-input {
+       flex-grow: 1;
+       padding: 10px;
+       font-size: 1.3vw;
+       border: 1px solid #ccc;
+       border-radius: 4px 0 0 4px;
+   }
+   
+   .search-button,
+   .all-button {
+       padding: 10px 20px;
+       font-size: 16px;
+       color: #fff;
+       background-color: #6c757d;
+       border: none;
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+   }
+   
+   .search-button {
+       border-radius: 0 4px 4px 0;
+       font-size : 1vw;
+   }
+   
+   .all-button {
+       border-radius: 4px;
+       font-size : 1vw;
+       height : 45px;
+   }
+   
+   .search-button:hover,
+   .all-button:hover {
+       background-color: #5a6268;
+   }
 
     .center {
-    	margin-top:50px;
+       margin-top:50px;
         text-align: center;
     }
     .pagination {
@@ -139,143 +149,8 @@
         text-align: center;
         padding: 10%;
     }  
-    
-    /* 사이드바 */
-    .main_content {
-	    max-width: 1300px; 
-	    height: 680px;
-	    margin: 5rem auto;
-	    background-color: rgb(247, 247, 247);
-	    display: flex;
-	    flex-direction: row; 
-	}
-	/* 사이드바 */
-	.section1{
-	    width: 20%;
-	    margin-right: 2rem;
-	    height: 100%;
-	    background-color: white;
-	    font-family: 'BMHANNAPro';
-	    background-color: white;
-        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-	}
-	.menu {
-	    list-style-type: none;
-	    padding: 0;
-	    height: 600px;
-	    background-color: white;  
-	}
-	
-	.menu-item {
-	    width: 100%;
-	    background-color: white;
-	    font-family: 'BMHANNAPro';
-	    font-size: 22px;
-	}
-	
-	.menu-item a {
-	    color: black;
-	    text-decoration: none;
-	    display: block;
-	    padding: 20px;
-	    padding-left: 30px;
-	    background-color: white;
-	    transition: background-color 0.3s ease;
-	    font-family: 'BMHANNAPro';
-	} 
-	.menu-item a:hover {
-	    background-color: rgb(247, 247, 247);
-	}
-	@keyframes slide-down {
-	    0% {
-	        opacity: 0;
-	        transform: translateY(-10px);
-	    }
-	    100% {
-	        opacity: 1;
-	        transform: translateY(0);
-	    }
-	}
-	
-	@keyframes slide-up {
-	    0% {
-	        opacity: 1;
-	        height: auto;
-	    }
-	    100% {
-	        opacity: 0;
-	        height: 0;
-	        padding: 0;
-	        margin: 0;
-	        border: 0;
-	    }
-	}
-	.submenu {
-	    display: none;
-	    list-style-type: none;
-	    padding: 0;
-	    margin-top: 5px;
-	    overflow: hidden;
-	}
-	
-	.submenu li a {
-	    color: black;
-	    text-decoration: none;
-	    padding: 20px;
-	    display: block;
-	    transition: background-color 0.3s ease;
-	}
-	.submenu li a:hover {
-	    background-color: white;
-	}
-	/* 나의 정보 form */
-	.section2{
-	    width: 100%;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: flex-start;
-	    align-items: stretch;  
-    	padding: 20px;
-    	background-color: white;
-        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
-        border-radius: 20px;
-	}
-	.container {
-	    width: 100%;
-	    max-width: 1300px;  
-	    margin: 0 auto;
-	} 
 </style>
 </head>
-<body> 
-	 <%@ include file="../../include/header.jsp" %>
-	    <div class="main_content">
-        <div class="section1">
-            <ul class="menu">
-                <li class="menu-item"><a href="/user/mypage">나의 정보</a></li>
-                <li class="menu-item">
-                    <a href="#">독후감 목록</a>
-                    <ul class="submenu">
-                        <li><a href="/user/bookList">&nbsp;&nbsp;&nbsp;&nbsp; 작성된 독후감</a></li>
-                        <li><a href="/user/saveTextList">&nbsp;&nbsp;&nbsp;&nbsp; 나만보기</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item"><a href="/user/event/parList">이벤트 참여 내역</a></li>
-                <li class="menu-item"><a href="/book/apply">도서 신청</a></li>
-                <li class="menu-item">
-                    <a href="#">문의 사항</a>
-                    <ul class="submenu">
-                        <li><a href="/member/sg/create">&nbsp;&nbsp;&nbsp;&nbsp; 문의 사항 작성</a></li>
-                        <li><a href="/member/sg/list">&nbsp;&nbsp;&nbsp;&nbsp; 문의 사항 목록</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="section2">
-			<section>
-        	<main>
             <div id="section_wrap" class="container">
                 <%
                     User user_nick = (User) session.getAttribute("user");
@@ -284,15 +159,15 @@
                     <h3><%= (user_nick != null) ? user_nick.getUser_nickname() : "" %>님의 이벤트 참여 내역</h3>
                 </div>
                 <br>
-				<div class="search-container">
-				    <form action="/user/event/parList" method="get" class="search-form">
-				        <input type="text" class="search-input" name="searchKeyword" placeholder="이벤트 제목 검색">
-				        <button type="submit" class="search-button">검색</button>
-				    </form>
-				    <form action="/user/event/parList" method="get" class="all-form">
-				        <button type="submit" class="all-button">전체</button>
-				    </form>
-				</div> 
+            <div class="search-container">
+                <form action="/user/event/parList" method="get" class="search-form">
+                    <input type="text" class="search-input" name="searchKeyword" placeholder="이벤트 제목 검색">
+                    <button type="submit" class="search-button">검색</button>
+                </form>
+                <form action="/user/event/parList" method="get" class="all-form">
+                    <button type="submit" class="all-button">전체</button>
+                </form>
+            </div> 
                 <div class="event_list">
                     <% if (request.getAttribute("userEvents") == null || ((List<Map<String, String>>) request.getAttribute("userEvents")).isEmpty()) { %>
                         <p id="list_empty">참여한 이벤트가 없습니다.</p>
@@ -345,8 +220,6 @@
                     <% } %>
                 </div>
             </div>
-        </main>
-    </section>
     <%
         Event paging = (Event) request.getAttribute("paging");
         if (paging != null) {
@@ -383,8 +256,6 @@
     %>
         </div> 
     </div>
-    
-    
     <script>
         function checkEventEndDate(eventNo, diffInDays) {
             if (diffInDays > 30) {
@@ -394,48 +265,3 @@
             }
         }
     </script>
-    
-    <!-- 마이페이지 드롭다운 -->
-    <script>
-	  document.addEventListener("DOMContentLoaded", function() {
-	      const menuItems = document.querySelectorAll(".menu-item > a");
-	
-	      menuItems.forEach(function(item) {
-	          const submenu = item.nextElementSibling;
-	          let isOpen = false;
-	
-	          item.addEventListener("click", function(event) {
-	              if (submenu) {
-	
-	                  if (isOpen) {
-	                      submenu.style.animation = "slide-up 0.3s ease";
-	                      
-	                      setTimeout(function(){
-	                          submenu.style.display = "none";
-	                          submenu.style.animation = "";
-	                      }, 300);
-	
-	                      isOpen = false;
-	                  } else {
-	                      submenu.style.display = "block";
-	                      submenu.style.height = "auto";
-	                      void submenu.offsetWidth;
-	                      submenu.style.animation = "slide-down 0.3s ease";
-	                      submenu.style.height = submenu.scrollHeight + "px";
-	
-	                      isOpen = true;
-	                  }
-	              }
-	          });
-	      });
-	
-	      const submenuLinks = document.querySelectorAll(".submenu li a");
-	      submenuLinks.forEach(function(link) {
-	          link.addEventListener("click", function(event) {
-	          });
-	      });
-	  });
-	  </script>
-  
-</body>
-</html>

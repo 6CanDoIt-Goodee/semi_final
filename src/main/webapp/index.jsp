@@ -198,7 +198,7 @@
 	}
 	
 	.event_title {
-	    font-size: 2.5vw;
+	    font-size: 34px;
 	    font-weight: bold;
 	    margin-bottom: 10px;
 	    color: rgb(0, 0, 0);
@@ -215,20 +215,20 @@
 	.event_form_text {
 	    background-color: rgba(248, 224, 119, 0.65);
 	    font-family: 'LeferiPoint-BlackA';
-	    font-size: 1.3vw;
+	    font-size: 20px;
 	    padding: 7px 7px 0px 7px;
 	}
 	
 	.event-dday {
 	    font-weight: bold;
-	    font-size: 1.7vw;
+	    font-size: 20px;
 	    color: #edbb45;
 	    margin-left: 15px;  
 	} 
 	
 	.event_date {
 	    margin-top: 5%;
-	    font-size: 1.3vw;
+	    font-size: 20px;
 	    color: rgb(0, 0, 0);
 	    background-color: rgba(255, 255, 255, 0);
 	    font-family: 'LeferiPoint-BlackA';

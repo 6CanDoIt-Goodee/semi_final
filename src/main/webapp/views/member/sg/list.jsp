@@ -5,259 +5,162 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
     
 <!DOCTYPE html>
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>6캔두잇</title>
+    <title>사용자 문의사항 목록</title>
 <link href="/resources/css/member/sg/pasing.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"/>
  </head>
- 
 <style>
 body {
-	background-color: rgb(247, 247, 247);
+   background-color: rgb(247, 247, 247);
 }
-
-.main_content {
-	max-width: 1300px;
-	height: 750px;
-	margin: 5rem auto;
-	display: flex;
-	flex-direction: row;
-}
-/* 사이드바 */
-.section1 {
-	width: 20%;
-	margin-right: 2rem;
-	height: 100%;
-	background-color: white;
-	font-size:15px
-}
-
-.section2 {
-	width: 80%;
-	margin-right: 2rem;
-	margin-top:50px
-}
-
-.section2>form {
-	height: 350px;
-}
-
-.menu {
-	list-style-type: none;
-	padding: 0;
-	height: 600px;
-	background-color: white;
-}
-
-.menu-item {
-	width: 100%;
-	background-color: white;
-}
-
-.menu-item a {
-	color: black;
-	text-decoration: none;
-	display: block;
-	padding: 20px;
-	padding-left: 30px;
-	background-color: white;
-	transition: background-color 0.3s ease;
-}
-
-.menu-item a:hover {
-	background-color: rgb(247, 247, 247);
-}
-
-@keyframes slide-down { 0% {
-	opacity: 0;
-	transform: translateY(-10px);
-}
-
-100%{ 
-	opacity:1;
-	transform:translateY(0);
-	}
-}
-@keyframes slide-up { 0% {
-	opacity: 1;
-	height: auto;
-}
-
-100%{
-	opacity:0;
-	height:0;
-	padding:0;
-	margin:0;
-	border:0;
-	}
-}
-.submenu {
-	display: none;
-	list-style-type: none;
-	padding: 0;
-	margin-top: 5px;
-	overflow: hidden;
-}
-
-.submenu li a {
-	color: black;
-	text-decoration: none;
-	padding: 20px;
-	display: block;
-	transition: background-color 0.3s ease;
-}
-
-.submenu li a:hover {
-	background-color: white;
-}
-
 .write_container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 680px;
+   
 }
-
+.sgList{
+   margin : 40px;
+   font-size : 1vw;
+   height : 600px;
+   background: white;
+}
 .form_write {
-	padding: 2rem;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: 50%;
+   padding: 2rem;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   width: 50%;
+   
 }
 
 .form_write input, .form_write textarea {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 1rem;
-	border: 1px solid #ced4da;
-	border-radius: 5px;
-	transition: border-color 0.2s;
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 1rem;
+   border: 1px solid #ced4da;
+   border-radius: 5px;
+   transition: border-color 0.2s;
 }
 
 .form_write input:focus, .form_write textarea:focus {
-	border-color: #80bdff;
-	outline: none;
+   border-color: #80bdff;
+   outline: none;
 }
 
 .bw_btn {
-	text-align: right;
+   text-align: right;
 }
 
 .btn-custom {
-	background-color: #6c757d;
-	color: white;
+   background-color: #6c757d;
+   color: white;
 }
 
 .btn-custom:hover {
-	background-color: #5a6268;
+   background-color: #5a6268;
 }
 
 * {
-	background-color: rgb(247, 247, 247);
-	box-sizing: border-box;
-	margin: 0;
+   background-color: rgb(247, 247, 247);
+   box-sizing: border-box;
+   margin: 0;
 }
-
-html {
-	font-size: 10px;
-}
-
 .search_section {
-	margin-bottom: 20px
+   margin-bottom: 20px;
+   
+}
+.search_title {
+   font-size: 23px;
+   font-weight: 600;
+   text-align: center;
+   color: #2c2c2c;
+   margin-bottom: 20px;
 }
 
-.search_title {
-	font-size: 23px;
-	font-weight: 600;
-	text-align: center;
-	color: #2c2c2c;
-	margin-bottom: 20px;
+.search_container{
+   background: white;
 }
 
 .search_input {
-	width: 40%;
-	padding: 15px 24px;
-	height: 30px;
-	font-size: 14px;
-	line-height: 18px;
-	color: #575756;
-	border-radius: 20px;
-	border: 1px solid #575756;
+   width: 40%;
+   padding: 15px 24px;
+   height: 30px;
+   font-size: 14px;
+   line-height: 18px;
+   color: #575756;
+   border-radius: 20px;
+   border: 1px solid #575756;
+   background: white;
 }
 
 .search_btn {
-	border: none;
-}
-
-.status_btn{
-  border: none;
-  margin-left: 420px;
-  font-size: 14px;
+   border: none;
+   background: white;
 }
 
 #sglist {
-	width: 1000px;
+   width: 1000px;
 }
 
 .board_list {
-	width: 100%;
-	border-collapse: collapse;
-	border-top: 2px solid #000;
+   width: 100%;
+   border-collapse: collapse;
+   border-top: 2px solid #000;
+   background: white;
 }
 
 .board_list th, .board_list td {
-	padding: 15px 0;
-	text-align: center;
-	font-size: 1.4rem;
-	border-bottom: 1px solid #ddd;
+   padding: 15px 0;
+   text-align: center;
+   border-bottom: 1px solid #ddd;
+   background: white;
 }
 
 .board_list thead tr {
-	border-bottom: 1px solid #999;
+   border-bottom: 1px solid #999;
 }
 
-.board_list th {
-	font-weight: 600;
-}
+
 
 .board_list .num {
-	width: 10%;
+   width: 10%;
 }
 
 .board_list .title {
-	width: 60%;
-	text-align: left;
+   width: 60%;
+   text-align: left;
 }
 
 .board_list .title a {
-	color: #2c2c2c;
-	text-decoration: none;
+   color: #2c2c2c;
+   text-decoration: none;
 }
 
 .board_list thead .title {
-	text-align: center;
+   text-align: center;
 }
 
 .board_list .date {
-	width: 10%;
+   width: 10%;
 }
 
 .board_list .status {
-	width: 10%;
+   width: 10%;
 }
 
 #paging{
-	width: 100%;
+   width: 100%;
 }
 .center { 
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50vh;
 }
 .pagination {
   display: inline-block;
@@ -277,53 +180,18 @@ html {
 }
 .pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
-  <body>
 <% Boolean success = (Boolean) request.getAttribute("success"); %>
 <% if (success != null && success) { %>
     <script type="text/javascript">
         alert("신청이 완료되었습니다");
     </script>
 <% } %>
-   <%@ include file="../../include/header.jsp" %>
-            <div class="main_content">
-            <!-- 이 선 위는 변경 X -->
-            <!-- 아래에 추가 -->
-            <div class="section1">
-                <ul class="menu">
-                    <li class="menu-item"><a href="#">나의 정보</a></li>
-                    <li class="menu-item">
-                        <a href="#">독후감 목록</a>
-                        <ul class="submenu">
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp; 작성된 독후감</a></li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp; 나만보기</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item"><a href="#">이벤트 참여 내역</a></li>
-                    <li class="menu-item"><a href="/book/apply">도서 신청</a></li>
-                 <li class="menu-item">
-                        <a href="#">문의 사항</a>
-                        <ul class="submenu">
-                            <li><a href="/member/sg/create">&nbsp;&nbsp;&nbsp;&nbsp; 문의 사항 작성</a></li>
-                            <li><a href="/member/sg/list">&nbsp;&nbsp;&nbsp;&nbsp; 문의 사항 목록</a></li>
-                            <li><a href="/admin/sg/list">&nbsp;&nbsp;&nbsp;&nbsp; 관리자 문의사항 조회</a></li>
-							<li><a href="/admin/sg/basic">&nbsp;&nbsp;&nbsp;&nbsp; 관리자 기본답변 추가</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-<!-- 여기 밑에 넣을 내용 추가 하면 되는데
-위에 css 지울부분도 있고 그래서 일단 수정해야햄... 알아서 수정하시길.... ( 자기가 원하는대로 하면 될듯) -->
-<section class="section2">
-<!-- 검색 기능 -->
+<div class="sgList">
   <section class="search_section">
     <form action="/member/sg/list" name="search_sg_form" method="get">
      <div class="search_container">
        <input class="search_input" name="sg_title" type="text"  placeholder="제목을 입력하세요.">
         <input class="search_btn" type="submit" value="검색" style="font-size:15px">
-        <span class="status_btn">
-     	  <input class="search_btn" type="submit" name="sgSort" value="최신순">
-     	  <input class="search_btn" type="submit"  name="sgSort" value="오래된순">
-          </span>
       </div>
     </form>
   </section> 
@@ -338,7 +206,6 @@ html {
      </tr>
    </thead>
    <tbody>
-   
    <%
    // 문의사항 list 불러오기
    List<Suggestion> list =(List<Suggestion>)request.getAttribute("resultList");
@@ -363,6 +230,7 @@ html {
         <%}%>
       </tbody>
     </table>
+
 <!-- 페이징  -->
  <section id="paging">
   <% Suggestion paging = (Suggestion)request.getAttribute("paging"); %>
@@ -384,46 +252,4 @@ html {
   <%}%>  
  </section>  
 </section>
-  
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-      const menuItems = document.querySelectorAll(".menu-item > a");
-
-      menuItems.forEach(function(item) {
-          const submenu = item.nextElementSibling;
-          let isOpen = false;
-
-          item.addEventListener("click", function(event) {
-              if (submenu) {
-
-                  if (isOpen) {
-                      submenu.style.animation = "slide-up 0.3s ease";
-                      
-                      setTimeout(function(){
-                          submenu.style.display = "none";
-                          submenu.style.animation = "";
-                      }, 300);
-
-                      isOpen = false;
-                  } else {
-                      submenu.style.display = "block";
-                      submenu.style.height = "auto";
-                      void submenu.offsetWidth;
-                      submenu.style.animation = "slide-down 0.3s ease";
-                      submenu.style.height = submenu.scrollHeight + "px";
-
-                      isOpen = true;
-                  }
-              }
-          });
-      });
-
-      const submenuLinks = document.querySelectorAll(".submenu li a");
-      submenuLinks.forEach(function(link) {
-          link.addEventListener("click", function(event) {
-          });
-      });
-  });
-  </script>
-</body>
-</html>
+</div>

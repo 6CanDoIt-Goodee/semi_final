@@ -44,7 +44,7 @@ public class UserCreateEndServlet extends HttpServlet {
             user.setUser_email(email);
             user.setUser_nickname(nickname);
             int result = new UserDao().createUser(user);
-            System.out.println(result);
+
             if (result == -1) {
                 // 이메일당 계정 수 제한 초과
             	writer.println("<script>alert('해당 이메일로는 더 이상 계정을 생성할 수 없습니다. (최대 3개)');location.href='/views/member/user/create.jsp';</script>");

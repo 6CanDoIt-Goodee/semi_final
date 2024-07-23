@@ -1,49 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.book.member.user.vo.User" %>  
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
 <style>
-	@font-face {
-	    font-family: 'JalnanGothic';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-	
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 600px;
-        margin-top: -50px; 
-    }
-
-        #main_logo {
-        font-size: 33px;
-        color: rgb(224, 195, 163);
-        text-decoration: none;
-        font-family: 'JalnanGothic';
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-    }
 
     .text-center {
         margin-bottom: 50px;
@@ -55,11 +15,11 @@
         align-items: center;
         justify-content: flex-start;
     }
-
     label {
         margin-right: 15px;
         font-weight: bold;
         min-width: 120px;
+
     }
 
     input[type="text"], input[type="password"], input[type="button"], input[type="email"], select {
@@ -67,14 +27,15 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 16px;
+   
     }
 
     input[type="text"], input[type="password"], input[type="email"] {
         width: calc(100% - 135px);
         max-width: 400px;
         margin-right: 10px;
+       
     }
-
     select {
         width: 200px;
     }
@@ -100,24 +61,27 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        width: 100px;
+        width: 120px;
+      
     }
 
     .btn-secondary {
         background-color: #6c757d;
     }
+    .container {
+    	margin-top : 30px;
+    }
+     .account_form{
+     margin-left: 70px;
+     }
 </style>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <a href="/" id="main_logo">Knock Book</a>
-        </nav>
+<div class="container">
+    
         <div class="text-center">
             <h2>회원 정보 수정</h2>
             <hr />
         </div>
-        <form action='/user/editEnd' name="modify_account_form" method="post">
+        <form action='/user/editEnd' name="modify_account_form" method="post" class="account_form">
             <%User u= (User)session.getAttribute("user");%>
             <div class="form-group">
                 <label for="name">이름</label>
@@ -131,7 +95,7 @@
                     <label for="pw">비밀번호</label>
                     <input type="password" oninput="validatePassword()" placeholder="비밀번호를 입력해주세요." id="pw" name="pw" style="width: 500px;">
                 </div>
-                <span id="tooltip-text" style="font-size: 10px;color: red; position: relative; top: -15px; left: 140px;">길이가 8~16자리 이하의 영문 대/소문자, 숫자, 특수문자만 사용 가능합니다.</span>
+                <span id="tooltip-text" style="font-size: 10px;color: red; position: relative; top: -15px; left: 140px;">길이가 8~16자리 이하의 영문 대/소문자, 숫자, 특수문자(@$!%*?&)만 사용 가능합니다.</span>
             <div class="form-group">
                 <label for="chpw">비밀번호 확인</label>
                 <input type="password" name="chpw" id="chpw" placeholder="비밀번호를 다시 입력해주세요" style="width: 500px;">
@@ -154,8 +118,9 @@
                 </div>
             <div class="form-group">
                     <label for="nickname">닉네임</label>
-                    <input type="text" placeholder="닉네임을 입력해주세요." name="nickname" style="width: 500px;">
-                    <input type="button" value="닉네임 랜덤 생성">
+                    <input type="text" placeholder="닉네임을 입력해주세요." id="nickname" name="nickname" style="width: 500px;">
+                    <input type="button" onclick="checkNickname();" value="닉네임 중복확인">
+                    <input type="button" onclick="generateNickname();" value="닉네임 랜덤 생성">
                 </div>
             <div class="button-group">
                 <button type="button" class="btn" onclick="submit_button();">수정 완료</button>
@@ -184,7 +149,7 @@
     }
     
     
- 	// 이메일 도메인 설정 함수 정의
+    // 이메일 도메인 설정 함수 정의
     function setEmailDomain() {
         const emailSelect = document.getElementById('email_select');
         const emailDomain = document.getElementById('email_domain');
@@ -233,9 +198,50 @@
         };
         xhr.send("email=" + encodeURIComponent(email) + "&code=" + encodeURIComponent(code));
     }
+ // 닉네임 랜덤생성
+    function generateNickname() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/user/nicknameRandom', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById('nickname').value = xhr.responseText;
+            } else if (xhr.readyState === 4) {
+                alert('닉네임 생성에 실패하였습니다.');
+            }
+        };
+        xhr.send();
+    }
     
-    
-    
+ // 닉네임 중복 확인 함수 정의
+    function checkNickname() {
+        const form = document.modify_account_form;
+        const nickname = form.nickname.value;
+        
+        const letterNumberHangulPattern = /^[a-zA-Z0-9가-힣\s]{2,16}$/;
+        
+        if (!nickname) {
+            alert("닉네임을 입력하세요.");
+            form.nickname.focus();
+        }else if (!letterNumberHangulPattern.test(nickname)) {
+            alert('닉네임은 길이 2~16자의 영문자 또는 한글만 포함할 수 있습니다.');
+            form.nickname.focus();
+        } else {
+            // AJAX 요청을 사용하여 아이디 중복 확인
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/user/checkNickname", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (xhr.responseText === "duplicate") {
+                        alert("중복된 닉네임입니다.");
+                    } else if (xhr.responseText === "available") {
+                        alert("사용 가능한 닉네임입니다.");
+                    }
+                }
+            };
+            xhr.send("nickname=" + encodeURIComponent(nickname));
+        }
+    }
     
     function submit_button() {
         const form = document.modify_account_form;
@@ -246,8 +252,11 @@
         const namePattern1 = /^[가-힣]{2,4}$/;
         const namePattern2 = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; 
         
-        if (!form.pw.value) {
-        	alert("비밀번호를 입력하세요.");
+        if (!form.id.value) {
+            alert("아이디를 입력하세요.");
+            form.id.focus();
+        } else if (!form.pw.value) {
+            alert("비밀번호를 입력하세요.");
             form.pw.focus();
         } else if (!form.chpw.value) {
             alert("비밀번호 확인을 입력하세요.");
@@ -290,5 +299,3 @@
         }
     }
     </script>
-</body>
-</html>

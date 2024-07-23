@@ -69,7 +69,7 @@ public class MemEventParListServlet extends HttpServlet {
          request.setAttribute("paging", paging);
          request.setAttribute("userEvents", userEvents);
 
-         RequestDispatcher rd = request.getRequestDispatcher("/views/member/event/MemParticipateList.jsp");
+         RequestDispatcher rd = request.getRequestDispatcher("/views/member/event/mypageMemPartiList.jsp");
          rd.forward(request, response);
      }
 

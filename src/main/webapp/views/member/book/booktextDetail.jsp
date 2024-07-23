@@ -131,19 +131,43 @@ justify-content:right;
 .replyBtns:hover {
    background-color: #e0e0e0;
 }
+ .holeList {
+        font-family: 'LINESeedKR-Bd'; 
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 1rem 1rem;
+        background-color: white;
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+    }
+      .center {
+        text-align: center;
+        margin-top: 20px;
+    }
+    	  
+	.word h3 {
+         margin: 30px 0px;
+         text-align: center;
+         font-size: 30px;
+	}
+    
     </style>
 </head>
 <body>
  <%@ include file="../../../views/include/header.jsp" %>
 
        <%-- 컨테이너 div --%>
-        <div id="detail_container" class="container">
+<section class ="holeList">
+<div class="form_">
+        <div class="word">
+	                <h3>도서 목록</h3>
+	            </div>
             <%@ page import="com.book.member.book.vo.BookText, java.util.*" %>
             <% List<Map<String, String>> list = (List<Map<String, String>>) request.getAttribute("resultList");
             // for each문 시작
                for (Map<String, String> detail : list) { %>
                 <div class="detail_section">
-                    <h4>책 이름</h4>
+                   
                     <p><%= detail.get("bk_title") %></p>
                 </div>
                 <div class="detail_section">
@@ -163,21 +187,22 @@ justify-content:right;
                     <p><%= detail.get("recommendation") %></p>
                 </div>
                 <div class="detail_section">
-                    <h4>읽기 시작한 날짜</h4>
+                    <h4>읽기 시작</h4>
                     <p><%= detail.get("bt_start") %></p>
                 </div>
                 <div class="detail_section">
-                    <h4>읽기 종료한 날짜</h4>
+                    <h4>읽기 종료</h4>
                     <p><%= detail.get("bt_end") %></p>
                 </div>
                 <div class="detail_section">
-                    <h4>독후감</h4>
+                    <h4>내용</h4>
                     <p><%= detail.get("bt_content") %></p>
                 </div>
                 <div class="detail_section detail_image">
                     <h4>책 이미지</h4>
                     <img src="<%= detail.get("bk_img") %>" alt="책 이미지" width="300px">
                 </div>
+</div>
                 <% User user_bt = (User) session.getAttribute("user");
                    if (user_bt != null) {
                    int userNumber = user_bt.getUser_no();
@@ -235,6 +260,7 @@ justify-content:right;
                       var userNo = "<%= likeNumber %>";
                       var categoryNo = "<%= detail.get("bk_cate_no")%>";
                       var booktextNo = "<%= detail.get("bt_no") %>";
+                   jQuery.noConflict();
                    $.ajax({
                       type : "POST",
                       url : "<%=request.getContextPath()%>/like/insert",
@@ -270,7 +296,7 @@ justify-content:right;
 
            <% } %>
 
-        </div>
+      </section>
 
 
     <section class="bkReplyContainer">
