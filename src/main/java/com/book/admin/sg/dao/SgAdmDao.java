@@ -150,17 +150,19 @@ public class SgAdmDao {
 
 		try {
 			conn = getConnection();
-			String sql = "SELECT sg_reply_no, sg_no, user_no, sg_reply_content FROM suggestion_reply WHERE sg_no = ?";
+			String sql = "SELECT sg_reply_no, sg_no, user_no, sg_reply_content, sg_reply_date FROM suggestion_reply WHERE sg_no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, sgNo);
 
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				sr = new SuggestionReply();
-				sr.setSg_reply_no(rs.getInt("sg_reply_no"));
-				sr.setSg_no(rs.getInt("sg_no"));
-				sr.setUser_no(rs.getInt("user_no"));
-				sr.setSg_reply_content(rs.getString("sg_reply_content"));
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			if (rs.next()) {
+				sr = new SuggestionReply(
+						rs.getInt("sg_reply_no"), 
+						rs.getInt("sg_no"), 
+						rs.getInt("user_no"),
+						rs.getString("sg_reply_content"),
+						rs.getTimestamp("sg_reply_date").toLocalDateTime());
 			}
 
 		} catch (Exception e) {

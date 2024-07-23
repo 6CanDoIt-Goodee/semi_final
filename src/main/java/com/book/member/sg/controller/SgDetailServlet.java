@@ -1,7 +1,6 @@
 package com.book.member.sg.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.book.admin.sg.dao.SgAdmDao;
 import com.book.admin.sg.vo.SuggestionReply;
 import com.book.member.sg.dao.SgMemDao;
 import com.book.member.sg.vo.Suggestion;
@@ -29,10 +29,10 @@ public class SgDetailServlet extends HttpServlet {
 		sgOp.setSg_no(sgNo);
 		
 		 Suggestion sgDetail = new SgMemDao().detailSg(sgOp);
-		 List<SuggestionReply> list = new SgMemDao().getReplyList(sgNo);
-		
+		 SuggestionReply sgReply = new SgAdmDao().getReplyList(sgNo);
+		 System.out.println("servelt"+sgReply);
 		  if (sgDetail != null) {
-			   request.setAttribute("replyList", list);
+			   request.setAttribute("sgReply", sgReply);
 	            request.setAttribute("sgDetail", sgDetail);
 	            RequestDispatcher view = request.getRequestDispatcher("/views/member/sg/detail.jsp");
 	            view.forward(request, response);

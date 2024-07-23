@@ -27,13 +27,13 @@ public class SgListServlet extends HttpServlet {
 		// user session 
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
-		
+		// form 에서 가져온 값들
 		String title = request.getParameter("sg_title");
-		// 
+		String sgSort = request.getParameter("sgSort");
 		Suggestion sgOp = new Suggestion();
 		sgOp.setSg_title(title);
 		sgOp.setUser_no(u.getUser_no());
-		
+		// 페이징
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage != null) {
 			sgOp.setNowPage(Integer.parseInt(nowPage));
@@ -41,7 +41,7 @@ public class SgListServlet extends HttpServlet {
 		// sgOp에 페이징 추가 
 		sgOp.setTotalData(new SgMemDao().selectSgCount(sgOp));
 		// sgOp 에 list 추가
-		List<Suggestion> list = new SgMemDao().selectSgList(sgOp);
+		List<Suggestion> list = new SgMemDao().selectSgList(sgOp,sgSort);
 		// setAttribute로 값 보내주기
 		request.setAttribute("paging", sgOp);
 		request.setAttribute("resultList", list);

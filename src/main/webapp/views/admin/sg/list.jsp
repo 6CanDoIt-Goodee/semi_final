@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.book.member.sg.vo.Suggestion, java.util.*" %>
+    <%@page import="com.book.member.sg.vo.Suggestion, java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,7 +137,7 @@ html {
       <form action="/admin/sg/list" name="search_sg_form" method="get">
       <div class="search_container">
           <input class="search_input" name="sg_title" type="text"  placeholder="제목을 입력하세요.">
-          <input class="search_btn" type="submit" value="검색">
+          <input class="search_btn" type="submit" value="검색" style="font-size:15px">
           <span class="status_btn">
      	  <input class="search_btn" type="submit" name="sgStatus" value="미답변">
      	  <input class="search_btn" type="submit"  name="sgStatus" value="답변완료">
@@ -199,4 +199,3 @@ html {
  </section>  
   </section>
 </body>
-</html>

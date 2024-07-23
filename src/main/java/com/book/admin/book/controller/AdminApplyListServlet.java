@@ -1,6 +1,7 @@
-package com.book.member.book.controller;
-import com.book.member.book.dao.ApplyBookDao;
+package com.book.admin.book.controller;
+
 import com.book.admin.book.vo.ApplyBook;
+import com.book.member.book.dao.ApplyBookDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,13 +13,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-//사용자 도서신청 목록
-@WebServlet("/book/applyList")
-public class ApplyBookListServlet extends HttpServlet {
-
+@WebServlet("/book/applyStatusList")
+public class AdminApplyListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public ApplyBookListServlet() {
+    public AdminApplyListServlet() {
         super();
 
     }
@@ -43,7 +42,7 @@ public class ApplyBookListServlet extends HttpServlet {
         request.setAttribute("paging", ab);
         request.setAttribute("resultList", list);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/views/member/book/applyBookList.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/views/admin/book/adminApplyList.jsp");
         rd.forward(request, response);
 
     }

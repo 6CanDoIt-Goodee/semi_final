@@ -18,6 +18,8 @@ public class ApplyBookDao {
         Connection conn = getConnection();
         int result = 0;
         try{
+
+
             conn.setAutoCommit(false);
 
 
@@ -46,6 +48,7 @@ public class ApplyBookDao {
                 if (count2 > 0) {
                     System.out.println("책 신청이 이미 존재합니다.");
                     result = 0;
+
                 }else {
                     String sql3 = "INSERT INTO book_apply (apply_bk_title, apply_bk_author, apply_bk_publisher, user_no) VALUES (?,?,?, ?)";
                     pstmt = conn.prepareStatement(sql3);
@@ -89,13 +92,14 @@ public class ApplyBookDao {
 
         try{
 
-            String sql = "SELECT a.apply_bk_title AS 도서이름, a.apply_bk_author AS 저자, a.apply_bk_publisher AS 출판사, " +
+            String sql = "SELECT a.apply_no AS 신청번호, a.apply_bk_status AS 상태, a.apply_bk_title AS 도서이름, a.apply_bk_author AS 저자, a.apply_bk_publisher AS 출판사, " +
                     "b.user_nickname AS 사용자 FROM book_apply a " +
                     "JOIN users b ON a.user_no = b.user_no";
 
             if(title != null) {
                 sql += " WHERE a.apply_bk_title LIKE CONCAT('%','"+title+"','%')";
             }
+            sql += " ORDER BY CASE WHEN a.apply_bk_status = '0' THEN 0 ELSE 1 END, a.apply_bk_status";
             sql += " LIMIT "+ab.getLimitPageNo()+", "+ab.getNumPerPage();
 
             pstmt = conn.prepareStatement(sql);
@@ -103,17 +107,19 @@ public class ApplyBookDao {
 
             while(rs.next()){
                 Map<String, String> row = new HashMap<>();
+                row.put("apply_no", rs.getString("신청번호"));
                 row.put("apply_bk_title", rs.getString("도서이름"));
                 row.put("apply_bk_author", rs.getString("저자"));
                 row.put("apply_bk_publisher", rs.getString("출판사"));
                 row.put("user_nickname", rs.getString("사용자"));
+                row.put("apply_bk_status", rs.getString("상태"));
                 list.add(row);
 
             }
-            rs.close();
         }catch (Exception e){
             e.printStackTrace();
         }
+
 
         return list;
     }
@@ -139,12 +145,35 @@ public class ApplyBookDao {
             e.printStackTrace();
         }finally {
             try {
-            	if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
+                rs.close();
+                pstmt.close();
+                conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+        return result;
+    }
+
+    public int updateApplyStatus(int applyNo, int status){
+        int result = 0;
+        Connection conn = getConnection();
+        PreparedStatement pstmt = null;
+
+        try {
+
+            String sql = "UPDATE book_apply SET apply_bk_status = ? WHERE apply_no = ?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, status);
+            pstmt.setInt(2, applyNo);
+
+           result = pstmt.executeUpdate();
+           System.out.println("결과 : "+result);
+
+        }catch(Exception e) {
+            e.printStackTrace();
+
         }
         return result;
     }

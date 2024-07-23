@@ -48,48 +48,60 @@ public class SgMemDao {
 		return result;
 	}
 	// 문의사항 게시물 조회 및 검색
-	public List<Suggestion> selectSgList(Suggestion sgOp){
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Suggestion> list = new ArrayList<Suggestion>();
-		
-		try {
-			conn = getConnection();
-			String sql = "SELECT * FROM `suggestion` WHERE user_no = ?";
-			if(sgOp.getSg_title() !=null) {
-				sql += " AND sg_title LIKE CONCAT('%','"+sgOp.getSg_title()+"','%')";
-			}
-			sql+=" ORDER BY sg_reg_date DESC";
-			sql+=" LIMIT "+sgOp.getLimitPageNo()+", "+sgOp.getNumPerPage();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,sgOp.getUser_no());
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Suggestion result = new Suggestion(rs.getInt("sg_no"),
-													rs.getInt("user_no"),
-													rs.getString("sg_title"),
-													rs.getString("sg_content"),
-													rs.getString("ori_img1"),
-													rs.getString("new_img1"),
-													rs.getString("ori_img2"),
-													rs.getString("new_img2"),
-													rs.getString("ori_img3"),
-													rs.getString("new_img3"),
-													rs.getTimestamp("sg_reg_date").toLocalDateTime(),
-													rs.getTimestamp("sg_mod_date").toLocalDateTime(),
-													rs.getInt("sg_status"));
-				list.add(result);
-			}
-		}catch(Exception e 	) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-			close(conn);
-		}
-		return list;
+	public List<Suggestion> selectSgList(Suggestion sgOp, String sgSort) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    List<Suggestion> list = new ArrayList<Suggestion>();
+	    
+	    try {
+	        conn = getConnection();
+	        String sql = "SELECT * FROM `suggestion` WHERE user_no = ?";
+	        if (sgOp.getSg_title() != null) {
+	            sql += " AND sg_title LIKE ?";
+	        }
+	        sql += " ORDER BY sg_mod_date " + ("오래된순".equals(sgSort) ? "ASC" : "DESC");
+	        sql += " LIMIT ?, ?";
+	        
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, sgOp.getUser_no());
+	        
+	        int paramIndex = 2;
+	        if (sgOp.getSg_title() != null) {
+	            pstmt.setString(paramIndex++, "%" + sgOp.getSg_title() + "%");
+	        }
+	        pstmt.setInt(paramIndex++, sgOp.getLimitPageNo());
+	        pstmt.setInt(paramIndex, sgOp.getNumPerPage());
+	        
+	        rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            Suggestion result = new Suggestion(
+	                rs.getInt("sg_no"),
+	                rs.getInt("user_no"),
+	                rs.getString("sg_title"),
+	                rs.getString("sg_content"),
+	                rs.getString("ori_img1"),
+	                rs.getString("new_img1"),
+	                rs.getString("ori_img2"),
+	                rs.getString("new_img2"),
+	                rs.getString("ori_img3"),
+	                rs.getString("new_img3"),
+	                rs.getTimestamp("sg_reg_date").toLocalDateTime(),
+	                rs.getTimestamp("sg_mod_date").toLocalDateTime(),
+	                rs.getInt("sg_status")
+	            );
+	            list.add(result);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	        close(conn);
+	    }
+	    return list;
 	}
+
 
 	// 문의사항 페이징바
 	public int selectSgCount(Suggestion sgOp) {

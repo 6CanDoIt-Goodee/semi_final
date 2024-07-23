@@ -228,12 +228,14 @@ justify-content:right;
                    String a = detail.get("user_no");
                    String str = Integer.toString(user_bt.getUser_no());
                    if (a.equals(str)) { %>
-                    <div>
-                        <input type="submit" class="update_bt" value="수정">
-                    </div>
-                    <div>
-                        <input type="submit" class="delete_bt" value="삭제">
-                    </div>
+                    <form action="/user/editCheck" method="post">
+                       <input type="hidden" name="bt_no" value="<%= detail.get("bt_no") %>">
+                       <button type="submit" class="btn btn-primary">수정</button>
+                    </form>
+                    <form action="/user/textDelete" method="post">
+                       <input type="hidden" name="bt_no" value="<%= detail.get("bt_no") %>">
+                       <button type="submit" class="btn btn-danger">삭제</button>
+                    </form>
                 <% } %>
     		<% } %>
              	<style>

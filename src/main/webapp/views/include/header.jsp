@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    
+    <!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <style>
         @charset "UTF-8";
 
@@ -183,6 +189,95 @@
             color: white; /* 텍스트 색상 변경 */
             border-radius: 4px; /* 모서리 둥글게 */
         }
+        
+       	/* 알림 */
+		.notification-icon {
+		    position: relative;
+		    cursor: pointer;
+		}
+		
+		.notification-count {
+		    position: absolute;
+		    top: -5px;
+		    right: -5px;
+		    background-color: red;
+		    color: white;
+		    border-radius: 50%;
+		    padding: 2px 5px;
+		    font-size: 12px;
+		}
+		
+		.modal {
+		    display: none;
+		    position: fixed;
+		    z-index: 1;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    overflow: auto;
+		    background-color: rgba(0,0,0,0.6);
+		}
+		
+		.modal-content {
+		    background-color: #fefefe;
+		    margin: 15% auto;
+		    padding: 20px;
+		    border: 1px solid #888;
+		    width: 80%;
+		    max-width: 600px;
+		}
+		
+		.modal-content h2 {
+			text-align: center;
+			font-family: 'Freesentation-9Black';
+			font-size:30px;
+			margin-bottom: 30px;
+		}
+		
+		a {
+			text-decoration: none;
+			color : black;
+		}
+		
+		.notification-item {
+			background-color: rgba(250, 210, 125, 0.5);
+			padding : 10px 0px;
+			text-align: center;
+			font-size:18px;
+			font-weight:600;
+			border-radius: 15px;
+			margin-bottom: 15px;
+		}
+		
+		#noti_date {
+			margin-top:5px;
+			font-size:15px;
+			color: rgba(77, 77, 77);
+		}
+		.close {
+		    color: #aaa;
+		    float: right;
+		    font-size: 28px;
+		    font-weight: bold;
+		    cursor: pointer;
+		}
+		
+		.close:hover,
+		.close:focus {
+		    color: black;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+		
+		#notification-icon {
+			font-size:20px;
+		    color: #ffd700;
+		}
+		 
+		#no_events {
+			text-align: center;
+		}
     </style>
 
 <section class="main_header">
@@ -293,28 +388,23 @@
     </header>
 </section>
 <script>
-$(document).ready(function() {
-    var modal = $("#notification-modal");
-    var icon = $("#notification-icon");
-    var closeBtn = $(".close");
-
-    icon.click(function() {
-        modal.css("display", "block");
-    });
-
-    closeBtn.click(function() {
-        modal.css("display", "none");
-    });
-
-    $(window).click(function(event) {
-        if (event.target == modal[0]) {
-            modal.css("display", "none");
-        }
-    });
-});
+	$(document).ready(function() {
+	    var modal = $("#notification-modal");
+	    var icon = $("#notification-icon");
+	    var closeBtn = $(".close");
+	
+	    icon.click(function() {
+	        modal.css("display", "block");
+	    });
+	
+	    closeBtn.click(function() {
+	        modal.css("display", "none");
+	    });
+	
+	    $(window).click(function(event) {
+	        if (event.target == modal[0]) {
+	            modal.css("display", "none");
+	        }
+	    });
+	});
 </script>
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

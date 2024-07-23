@@ -50,24 +50,39 @@
                     </select>
                     <hr>
                     <input type="button" value="등록" onclick="book_plus();">
-                    <input type="button" value="취소">
+                    <input type="button" value="초기화" onclick="book_reset();">
                 </form>
             </div>
         </div>
     </section>
 </main>
 <script>
-function book_plus(){
+function book_plus() {
     const form = document.book_request_form;
-    if(!form.book_title.value){
+    if (!form.img_up.value) {
+        alert("이미지주소를 입력하세요");
+    } else if (!form.book_title.value) {
         alert("도서명을 입력하세요");
-    } else if(!form.book_author.value){
+    } else if (!form.book_author.value) {
         alert("저자명을 입력하세요");
-    } else if(!form.book_publihser.value){
+    } else if (!form.book_publihser.value) {
         alert("출판사를 입력하세요");
-    } else {
+    }else if (form.book_category.value == 0) {
+        alert("카테고리를 선택해주세요");
+    } 
+    else {
+        alert("등록되었습니다!");
         form.submit();
-    }
+    };
+}
+
+function book_reset() {
+    const form = document.book_edit_form;
+    form.img_up.value = '';
+    form.book_title.value = '';
+    form.book_author.value = '';
+    form.book_publisher.value = '';
+    form.book_category.selectedIndex = 0;  
 }
 </script>
 </body>

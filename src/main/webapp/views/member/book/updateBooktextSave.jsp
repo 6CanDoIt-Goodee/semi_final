@@ -12,7 +12,7 @@
         crossorigin="anonymous"
     />
     <style>
-        * {
+         * {
             font-family: 'Ownglyph_meetme-Rg';
         }
         .write_container {
@@ -42,7 +42,7 @@
             flex-direction: column;
             align-items: center;
         }
-        .form_right img {
+        .form_right img { 
             max-width: 100%;
             border-radius: 10px;
         }
@@ -74,6 +74,7 @@
             width: 100%;
         }
     </style>
+
 </head>
 <body>
    <%@ include file="../../include/header.jsp" %>

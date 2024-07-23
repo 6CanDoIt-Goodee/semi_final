@@ -36,8 +36,7 @@ public class MemEventParServlet extends HttpServlet {
  
 		MemEvent memevent = new MemEvent();
 		memevent.setEventNo(eventNo);
-		memevent.setUserNo(userNo);
-
+		memevent.setUserNo(userNo); 
 		boolean result = false;
 
 		MemEventDao memEventDao = new MemEventDao();
@@ -50,5 +49,7 @@ public class MemEventParServlet extends HttpServlet {
         } else if ("대기 취소".equals(action)) {
             memEventDao.cancelWaiting(eventNo, userNo);
         } 
+		
+		System.out.println(action);
 	}
 }

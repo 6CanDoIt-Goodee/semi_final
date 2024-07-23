@@ -1,8 +1,7 @@
-<%@ page import="com.book.admin.sg.vo.SuggestionReply"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.book.member.sg.vo.Suggestion" %>
-<%@ page import="com.book.admin.book.*" %>
+<%@ page import="com.book.admin.sg.vo.SuggestionReply" %>
 <%@ page import="com.book.admin.sg.vo.Basic" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
@@ -105,6 +104,10 @@ body {
   border: none;
 }
 
+#replyDate{
+margin-left:30px
+}
+
 #btn_gr {
     gap: 10px;
     display: flex;
@@ -191,6 +194,7 @@ body {
                 int sgReplyNo = sr.getSg_reply_no();
                 int sgNo = sr.getSg_no();
                 String sgReply = sr.getSg_reply_content();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             %>
             <form id="updateSgForm" action="/admin/sg/replyUpdate" method="POST" style="display:none">
                 <input type="hidden" name="sg_reply_no" value="<%= sgReplyNo %>">
@@ -200,6 +204,7 @@ body {
                 <input class="sgBtn" type="reset" value="취소" onclick="chagneReplyForm()">
             </form>
             <div id="replyView">
+            	<span>관리자</span><span id="replyDate"><%=dtf.format(sr.getSg_reply_date()) %></span>
                 <div class="replyContent"><%= sgReply %></div>
                 <input class="sgBtn" type="button" value="수정" onclick="chagneReplyForm()">
                 <form action="/admin/sg/replyDelete" method="POST" style="display:inline">

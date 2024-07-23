@@ -15,7 +15,7 @@
 <link rel="stylesheet"
      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
      
 <style>
 	@charset "UTF-8";
@@ -165,7 +165,7 @@
 	
 	.fade {
 	    animation-name: fade;
-	    animation-duration: 1.5s;
+	    animation-duration: 7s;
 	}
 	
 	@keyframes fade {
@@ -296,7 +296,7 @@
 		                        long daysRemaining = (eventEndDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
 		                        String dday = (daysRemaining > 0) ? "D-" + daysRemaining : (daysRemaining == 0) ? "모집중" : "모집 기간 종료";
 		            %>  
-					        <div class="slide fade">
+					        <div class="slide">
 					            <a href="<%= detailUrl %>">
 					                <div class="slide-image-container"> 
 					                    <img src="<%= imageUrl %>" alt="Image <%= i + 1 %>" class="slide-image">

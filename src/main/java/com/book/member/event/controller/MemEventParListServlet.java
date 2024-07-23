@@ -23,14 +23,14 @@ import com.book.member.user.vo.User;
  
 @WebServlet("/user/event/parList")
 public class MemEventParListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
         
     public MemEventParListServlet() {
         super(); 
     }
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	 HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false);
          int userNo = 0;
          User user = null;
 
@@ -74,8 +74,8 @@ public class MemEventParListServlet extends HttpServlet {
      }
 
  
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-		doGet(request, response);
-	}
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+      doGet(request, response);
+   }
 
 }

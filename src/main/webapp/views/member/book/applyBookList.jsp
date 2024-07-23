@@ -248,6 +248,7 @@
                      <th>저자</th>
                     <th>출판사</th>
                     <th>신청한 사용자</th>
+                    <th>신청상태</th>
                 </tr>
             </thead>
             <tbody>
@@ -259,6 +260,24 @@
                         <td><%= row.get("apply_bk_author") %></td>
                         <td><%= row.get("apply_bk_publisher") %></td>
                         <td><%= row.get("user_nickname") %></td>
+                         <td>
+                          <%
+                             int status = Integer.parseInt(row.get("apply_bk_status"));
+                                String statusText = "";
+                                   switch (status) {
+                                   case 0:
+                                   statusText = "신청대기";
+                                   break;
+                                   case 1:
+                                   statusText = "신청완료";
+                                   break;
+                                   case -1:
+                                   statusText = "신청반려";
+                                   break;
+                                   }
+                          %>
+                          <%= statusText %>
+                       </td>
                     </tr>
                 <% }
                  } else {%>
