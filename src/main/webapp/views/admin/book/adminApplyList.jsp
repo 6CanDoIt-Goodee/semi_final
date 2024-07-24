@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <link rel="stylesheet"
      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
+    <style> 
         * {
             background-color: rgb(247, 247, 247);
             box-sizing: border-box;
@@ -30,9 +30,12 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .center {
-            text-align: center;
-        }
+         .center {
+	        display : flex;
+	        text-align: center;
+	        justify-content : center;
+	        margin-top: 20px;
+	    }
         .pagination {
             display: inline-block;
         }
