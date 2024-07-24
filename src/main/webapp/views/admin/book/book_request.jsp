@@ -6,102 +6,118 @@
 <meta charset="UTF-8">
 <title>관리자 도서 등록</title>
 <style>
-   body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0; 
+    padding: 0;
+    background-color: #f7f7f7;
 }
 
-main {
+header {
+    background-color: #eaeaea;
+    padding: 10px 20px;
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-#left {
-    flex: 1;
-    padding: 20px;
-}
-
-#right {
-    flex: 2;
-    padding: 20px;  
-    width : 900px;
+    justify-content: space-between;
     align-items: center;
-    margin-left : 550px;
 }
 
-.book_icon {
-    text-align: center;
+#header_nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
 }
 
-.book {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+#header_nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-input[type="text"],
-select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+#right {
+	margin-left : 350px;
+    width: 60%;
+    padding: 40px;
     box-sizing: border-box;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid #ccc;
+#my {
+    list-style: none;
+    padding: 0;
+}
+
+#my li {
     margin: 10px 0;
 }
 
-input[type="button"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+.book_icon {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.book {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* 버튼을 절대 위치로 배치하기 위해 추가 */
+}
+
+.book h2 {
+    margin-top: 0;
+}
+
+.book form {
+    display: flex;
+    flex-direction: column;
+}
+
+.book label {
+    margin-top: 10px;
+}
+
+.book input[type="text"],
+.book select {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.book .form-group {
+    margin-top: 10px;
+}
+
+.book .buttons {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.book .buttons input[type="button"] {
+    padding: 8px 12px; /* 버튼의 크기를 줄임 */
     border: none;
     border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px; /* 버튼 글자 크기를 줄임 */
     cursor: pointer;
-    margin-right: 10px;
 }
 
-input[type="button"]:hover {
-    background-color: #45a049;
+.book .buttons input[type="button"]:last-child {
+    background-color: #dc3545;
 }
 
-input[type="button"]:last-child {
-    margin-right: 0;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    #right {
-        margin-top: 20px;
-    }
+.book .buttons input[type="button"]:hover {
+    opacity: 0.8;
 }
 </style>
-
-</head>
 <body>
  <%@ include file="../../include/header.jsp" %>
-<main> 
+<main>
     <section id="right">
         <div class="book_icon">
             <div class="book">
