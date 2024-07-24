@@ -197,6 +197,13 @@
         text-align: center;
         margin-top: 20px;
     }
+    	.word h3 {
+         margin: 30px 0px;
+         text-align: center;
+         font-size: 30px;
+           font-weight: bold;
+           background-color: white;
+	}
       
     </style>
 
@@ -212,6 +219,9 @@
 <% } %>
    
 <section class ="holeList">
+      <div class="word">
+	       <h3>독후감 목록</h3>
+	  </div>
         <div class="search">
             <form action="/book/textList" name="search_board_form" method="get" class="search_board_form">
                 <input type="text" name="bw_content" value="<%= request.getAttribute("searchContent") %>" placeholder="검색하고자 하는 도서 이름을 검색하세요.">

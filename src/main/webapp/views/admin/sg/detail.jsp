@@ -190,6 +190,7 @@ margin-top:20px;
                 <p class="sg_post_info">
                     <span id="sg_post_date">작성일: <%= formatter.format(sg.getSg_mod_date()) %></span>
                 </p>
+                <% if (!imgSrc1.isEmpty() || !imgSrc2.isEmpty() || !imgSrc3.isEmpty()) { %>
                 <div class="imgContain">
                 <% if (!imgSrc1.isEmpty()) { %>
                     <img src="<%= imgSrc1 %>" alt="이미지 1" class="sg_image">
@@ -201,6 +202,7 @@ margin-top:20px;
                     <img src="<%= imgSrc3 %>" alt="이미지 3" class="sg_image">
                 <% } %>
                 </div>
+                <% } %>
                 <div id="sg_post_content"><%= sg.getSg_content() %></div>
             </div>
             <div class="btn_container">

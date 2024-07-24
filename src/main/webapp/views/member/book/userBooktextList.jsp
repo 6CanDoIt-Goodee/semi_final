@@ -171,6 +171,12 @@
         text-align: center;
         margin-top: 20px;
     }
+    	.word h3 {
+         margin: 30px 0px;
+         text-align: center;
+         font-size: 30px;
+           font-weight: bold;
+	}
     </style>
  <script>
         $(document).ready(function() {
@@ -196,7 +202,10 @@
    <%@ include file="../../include/header.jsp" %>
 
 <section class ="holeList">
-
+<section class ="holeList">
+       <div class="word">
+	       <h3>독후감 작성</h3>
+	  </div>
     <div id="section_wrap" class="container">
         <div class="search">
             <form action="/user/textList" name="search_board_form" method="get" class="search_board_form">
