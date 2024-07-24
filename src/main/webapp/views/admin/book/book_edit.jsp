@@ -5,35 +5,99 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 도서 등록</title>
-<link rel="stylesheet" href="../../resources/css/create_book.css">
+<title>관리자 도서 등록</title> 
+<style>
+	body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+ 
+#right {
+	margin-left : 350px;
+    width: 60%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+#my {
+    list-style: none;
+    padding: 0;
+}
+
+#my li {
+    margin: 10px 0;
+}
+
+.book_icon {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.book {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* 버튼을 절대 위치로 배치하기 위해 추가 */
+}
+
+.book h2 {
+    margin-top: 0;
+}
+
+.book form {
+    display: flex;
+    flex-direction: column;
+}
+
+.book label {
+    margin-top: 10px;
+}
+
+.book input[type="text"],
+.book select {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.book .form-group {
+    margin-top: 10px;
+}
+
+.book .buttons {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.book .buttons input[type="button"] {
+    padding: 8px 12px; /* 버튼의 크기를 줄임 */
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px; /* 버튼 글자 크기를 줄임 */
+    cursor: pointer;
+}
+
+.book .buttons input[type="button"]:last-child {
+    background-color: #dc3545;
+}
+
+.book .buttons input[type="button"]:hover {
+    opacity: 0.8;
+}
+</style>
 </head>
 <body>
-<header>
-    <nav id="header_nav">
-        <a href="#" id="main_logo">Knock Book</a>
-        <ul>
-            <li><a href="#" class="header_list">회원 관리</a></li>
-            <li><a href="#" class="header_list">관리자 페이지</a></li>
-            <li><a href="#" class="header_list" id="header_join">admin</a></li>
-            <li><a href="#" class="header_list" id="header_join">회원가입</a></li>
-        </ul>
-    </nav>
-</header>
-<main>
-    <section id="left">
-        <ul id="my">
-            <li>회원관리</li>
-            <li>이벤트 관리</li>
-            <li>도서 / 관리 페이지</li>
-            	<ul>
-            		<li><a href="/book/create">도서 등록</a></li>
-					<li><a href="/book/list">도서 목록 조회</a></li>
-					<li><a href="/book/requestEnd">도서 신청 조회</a></li>
-            	</ul>
-            <li>문의 사항 관리 페이지</li>
-        </ul>
-    </section>
+ <%@ include file="../../include/header.jsp" %>
      <%@ page import="com.book.admin.book.vo.Book, java.util.*" %>
     <section id="right">
         <div class="book_icon">

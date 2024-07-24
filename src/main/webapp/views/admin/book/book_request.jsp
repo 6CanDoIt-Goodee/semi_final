@@ -11,29 +11,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f7f7f7;
-}
-
-header {
-    background-color: #eaeaea;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#header_nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-}
-
-#header_nav a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
+} 
+ 
 #right {
 	margin-left : 350px;
     width: 60%;
