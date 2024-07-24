@@ -5,18 +5,103 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 도서 등록</title>
+<style>
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; 
+}
 
+main {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#left {
+    flex: 1;
+    padding: 20px;
+}
+
+#right {
+    flex: 2;
+    padding: 20px;  
+    width : 900px;
+    align-items: center;
+    margin-left : 550px;
+}
+
+.book_icon {
+    text-align: center;
+}
+
+.book {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+input[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+input[type="button"]:last-child {
+    margin-right: 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    #right {
+        margin-top: 20px;
+    }
+}
+</style>
+
+</head>
 <body>
  <%@ include file="../../include/header.jsp" %>
-<main>
-    <section id="left">
-        <ul id="my">
-            <li>회원관리</li>
-            <li>이벤트 관리</li>
-            <li>도서 / 관리 페이지</li>
-            <li>문의 사항 관리 페이지</li>
-        </ul>
-    </section>
+<main> 
     <section id="right">
         <div class="book_icon">
             <div class="book">

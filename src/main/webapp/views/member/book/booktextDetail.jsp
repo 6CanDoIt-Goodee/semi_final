@@ -37,7 +37,7 @@
             text-align: center;
         }
         .detail_image img {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
             border-radius: 5px;
         }
@@ -156,49 +156,47 @@ justify-content:right;
 
        <%-- 컨테이너 div --%>
 <section class ="holeList">
-<div class="form_">
-        <div class="word">
-	                <h3>도서 목록</h3>
-	            </div>
+<div class="form_"> 
             <%@ page import="com.book.member.book.vo.BookText, java.util.*" %>
             <% List<Map<String, String>> list = (List<Map<String, String>>) request.getAttribute("resultList");
             // for each문 시작
                for (Map<String, String> detail : list) { %>
-                <div class="detail_section">
-                   
-                    <p><%= detail.get("bk_title") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>카테고리</h4>
-                    <p><%= detail.get("bk_cate") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>작성자</h4>
-                    <p><%= detail.get("bt_writer") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>출판사</h4>
-                    <p><%= detail.get("bk_publisher") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>추천도</h4>
-                    <p><%= detail.get("recommendation") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>읽기 시작</h4>
-                    <p><%= detail.get("bt_start") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>읽기 종료</h4>
-                    <p><%= detail.get("bt_end") %></p>
-                </div>
-                <div class="detail_section">
-                    <h4>내용</h4>
-                    <p><%= detail.get("bt_content") %></p>
-                </div>
+               <div>
+	                <div class="word"> 
+	                    <h3><%= detail.get("bk_title") %></h3>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>카테고리</h4>
+	                    <p><%= detail.get("bk_cate") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>작성자</h4>
+	                    <p><%= detail.get("bt_writer") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>출판사</h4>
+	                    <p><%= detail.get("bk_publisher") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>추천도</h4>
+	                    <p><%= detail.get("recommendation") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>읽기 시작</h4>
+	                    <p><%= detail.get("bt_start") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>읽기 종료</h4>
+	                    <p><%= detail.get("bt_end") %></p>
+	                </div>
+	                <div class="detail_section">
+	                    <h4>내용</h4>
+	                    <p><%= detail.get("bt_content") %></p>
+	                </div>
+	            </div>
                 <div class="detail_section detail_image">
                     <h4>책 이미지</h4>
-                    <img src="<%= detail.get("bk_img") %>" alt="책 이미지" width="300px">
+                    <img src="<%= detail.get("bk_img") %>" alt="책 이미지" width="200px">
                 </div>
 </div>
                 <% User user_bt = (User) session.getAttribute("user");

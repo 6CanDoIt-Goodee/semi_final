@@ -27,11 +27,8 @@ public class BookDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
-		int bookno = Integer.parseInt(request.getParameter("books_no"));
-		System.out.println(bookno);
-		
-	
-		
+		int bookno = Integer.parseInt(request.getParameter("books_no")); 
+		 
 		int result = new BookDao().deleteBook(bookno);
 	    if (result > 0) {
 	        System.out.println("도서 정보가 성공적으로 삭제되었습니다.");

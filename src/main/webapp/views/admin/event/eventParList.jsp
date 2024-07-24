@@ -101,9 +101,11 @@
     @charset "UTF-8";
 
     .center {
+        display : flex;
         text-align: center;
+        justify-content : center;
+        margin-top: 20px;
     }
-
     .pagination {
         display: inline-block;
     }

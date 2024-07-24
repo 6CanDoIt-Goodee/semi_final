@@ -200,8 +200,7 @@
     </script>
 <% } %>
    <%@ include file="../../include/header.jsp" %>
-
-<section class ="holeList">
+ 
 <section class ="holeList">
        <div class="word">
 	       <h3>독후감 작성</h3>

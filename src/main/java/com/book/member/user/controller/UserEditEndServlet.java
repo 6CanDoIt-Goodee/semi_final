@@ -45,6 +45,8 @@ public class UserEditEndServlet extends HttpServlet {
            writer.flush(); 
            return;
         } else if (result > 0) {
+        	User updatedUser = new UserDao().getUserById(no);
+            session.setAttribute("user", updatedUser);
             writer.println("<script>alert('회원정보가 정상적으로 수정되었습니다.');location.href='/';</script>");
            writer.flush(); 
            return;

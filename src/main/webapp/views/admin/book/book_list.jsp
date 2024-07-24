@@ -56,7 +56,9 @@
         background-color: #f8f8f8;
     }
     .center {
+        display : flex;
         text-align: center;
+        justify-content : center;
         margin-top: 20px;
     }
     .pagination a {

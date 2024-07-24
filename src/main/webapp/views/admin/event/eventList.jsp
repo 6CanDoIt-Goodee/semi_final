@@ -128,9 +128,12 @@
 	/* paging */
 	@charset "UTF-8";
 	
-	.center {
-	    text-align: center;
-	}
+    .center {
+        display : flex;
+        text-align: center;
+        justify-content : center;
+        margin-top: 20px;
+    }
 	
 	.pagination {
 	    display: inline-block;

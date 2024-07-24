@@ -57,8 +57,10 @@
             background-color: #f8f8f8;
         }
         .center {
-            text-align: center;
-            margin-top: 20px;
+           display : flex;
+           text-align: center;
+           justify-content : center;
+           margin-top: 20px;
         }
         .pagination a {
             padding: 10px 15px;

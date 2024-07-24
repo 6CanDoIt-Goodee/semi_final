@@ -30,8 +30,8 @@
         margin-right: 10px; 
         background-color: #fff;
         color: #333;
-        height: 30px;  
-        width : 140px; 
+        height: 35px;  
+        width : 160px; 
     }
 
     select:focus {
@@ -53,6 +53,7 @@
        align-items: center;
        margin-bottom: 10px;
    }
+   
    
    .form-group label {
        width: 150px;  
@@ -163,6 +164,7 @@
     #eventCancelBtn:hover {
         background-color: #e53935;  
     }
+     
     
 </style>
 </head>

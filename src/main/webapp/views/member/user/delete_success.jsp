@@ -82,10 +82,7 @@
 </head>
 <body>
    <section class="main_header">
-      <header>
-         <div id="header_div">
-            <a href="/" class="main_logo" style="margin-left: 100px;">Knock Book</a>
-         </div>
+      <header> 
       </header>
       <main>
          <div style="font-size: 40px;">웹 사이트 회원 탈퇴 완료</div>

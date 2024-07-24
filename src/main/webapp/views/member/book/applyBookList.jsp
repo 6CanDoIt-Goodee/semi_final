@@ -15,6 +15,12 @@
      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
 
+	    .search_board_form{
+	       display: flex;
+	       justify-content: center; 
+	       align-items: center; 
+	    }
+    
         .center {
             text-align: center;
         }

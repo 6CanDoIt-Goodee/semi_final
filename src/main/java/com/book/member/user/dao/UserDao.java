@@ -489,4 +489,31 @@ public class UserDao {
        }
        return result;
    }
+   
+   public User getUserById(int no) {
+       User user = null;
+       
+       String query = "SELECT * FROM users WHERE user_no = ?";
+       
+       try (Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+           pstmt.setInt(1, no);
+           try (ResultSet rs = pstmt.executeQuery()) {
+               if (rs.next()) {
+                   user = new User();
+                   user.setUser_no(rs.getInt("user_no"));
+                   user.setUser_id(rs.getString("user_id"));
+                   user.setUser_pw(rs.getString("user_pw"));
+                   user.setUser_name(rs.getString("user_name"));
+                   user.setUser_nickname(rs.getString("user_nickname"));
+                   user.setUser_email(rs.getString("user_email"));
+                   user.setUser_active(rs.getInt("user_active"));
+                   user.setUser_create(rs.getTimestamp("user_create").toLocalDateTime());
+               }
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+       return user;
+   }
 }
