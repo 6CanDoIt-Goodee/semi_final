@@ -56,11 +56,9 @@ public class SgCreateEndServlet extends HttpServlet {
 		      int result = new SgMemDao().createSg(sg);
 		      
 		      if(result > 0) {
-		         System.out.println("성공");
+		       
 		         response.sendRedirect(request.getContextPath() + "/member/sg/list");
-		      }else {
-		         System.out.println("실패");
-		      }  
+		      }
 			
 		}
 

@@ -30,12 +30,11 @@ public class UpdateEndUserBooktextServlet extends HttpServlet {
         String bt_start = request.getParameter("bw_start_date");
         String bt_end = request.getParameter("bw_end_date");
         String bt_content = request.getParameter("bw_content");
-        System.out.println(bt_end);
-        System.out.println(bt_start);
+       
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(bt_start, formatter);
         LocalDate endDate = LocalDate.parse(bt_end, formatter);
-        System.out.println(recommendation);
+    
         BookText bt = new BookText();
          // 세션에서 가져온 사용자 정보 사용
         bt.setBooktext_no(Integer.parseInt(bt_no));
@@ -44,7 +43,7 @@ public class UpdateEndUserBooktextServlet extends HttpServlet {
         bt.setBook_end_read(endDate);
         bt.setBook_content(bt_content);
         int result = new BookTextDao().updateInfo(bt);
-        System.out.println(result);
+    
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             if (result > 0) {

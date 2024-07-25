@@ -55,7 +55,7 @@ public class BookTextSaveServlet extends HttpServlet {
 
             endDate = LocalDate.parse(end, formatter);
             startDate =LocalDate.parse(start, formatter);
-            System.out.println("추천도 : "+recommendationNo);
+           
             BookText bt = new BookText();
             bt.setBook_first_read(startDate);
             bt.setBook_end_read(endDate);
@@ -65,7 +65,7 @@ public class BookTextSaveServlet extends HttpServlet {
             bt.setUser_no(userNo); // 세션에서 가져온 사용자 정보 사용
 
             int result = new BookTextDao().inputSaveBookText(bt);
-            System.out.println(result);
+           
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter writer = response.getWriter();
             if (result > 0) {

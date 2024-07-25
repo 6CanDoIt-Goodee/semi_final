@@ -104,7 +104,7 @@
 <%@ include file="../../include/header.jsp" %>
 <section class="holeList">
  <div class="word">
-	       <h3>나만보기</h3>
+	       <h3>임시저장</h3>
 	  </div>
     <div class="search">
         <form action="/user/saveTextList" name="search_board_form" method="get" class="search_board_form">

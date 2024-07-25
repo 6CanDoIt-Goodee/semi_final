@@ -69,9 +69,6 @@ public class BookTextDetailServlet extends HttpServlet {
         request.setAttribute("bkReplyList", bkReplyList);
         request.setAttribute("resultList", list);
 
-        System.out.println("컬러는 " + color);
-        System.out.println("likCnt는 " + lkCnt);
-
         RequestDispatcher rd = request.getRequestDispatcher("/views/member/book/booktextDetail.jsp");
         rd.forward(request, response);
     }

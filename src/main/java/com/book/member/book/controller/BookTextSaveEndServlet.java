@@ -38,7 +38,6 @@ public class BookTextSaveEndServlet extends HttpServlet {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(bt_start, formatter);
         LocalDate endDate = LocalDate.parse(bt_end, formatter);
-        System.out.println(recommendation);
 
         int saveNo = Integer.parseInt(save_no);
         BookText bt = new BookText();
@@ -81,8 +80,7 @@ public class BookTextSaveEndServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
         }
 
-        System.out.println(result);
-     
+
        
         writer.close();
 

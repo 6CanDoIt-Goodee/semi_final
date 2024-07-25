@@ -8,7 +8,7 @@
 </head>
 <body>
 <style>
-		body {
+      body {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -49,7 +49,7 @@
     </style>
     <div class="container">
         <div class="error-code">500</div>
-        <div class="error-message">Page Not Found</div>
+        <div class="error-message">Internal Server Error</div>
         <button class="back-button" onclick="goToHome()">Back Home →</button>
     </div>
 

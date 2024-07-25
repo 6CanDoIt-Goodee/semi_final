@@ -38,12 +38,12 @@ public class UserCheckpwEndServlet extends HttpServlet {
             session.setAttribute("user", u);
             session.setMaxInactiveInterval(60*30);
          }
-         System.out.println("성공");
+     
          
          response.sendRedirect("/views/member/user/myProfileEdit.jsp");
       }else {
          response.sendRedirect("/views/member/user/checkpw_fail.jsp");
-         System.out.println("실패");
+        
       }
    }
 

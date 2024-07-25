@@ -162,12 +162,12 @@ body {
     </div>
     <div class="replyList">
     <!-- 답변 -->
-    <% List<SuggestionReply> replyList = (List<SuggestionReply>) request.getAttribute("replyList");
-    if (replyList != null && !replyList.isEmpty()) {
-        for (SuggestionReply reply : replyList) { %>
-        <div class="replyContent"><%=reply.getSg_reply_content()%></div>
-        <% }
-        } else { %>
+    <% 
+    SuggestionReply sr = (SuggestionReply) request.getAttribute("sgReply");
+    if (sr != null ) {
+        System.out.println("reply");%>
+        <div class="replyContent"><%=sr.getSg_reply_content()%></div>
+        <%  } else { %>
         <div class="replyContent">관리자가 빠른 시일 내에 답변을 드릴거에요 :)</div>
         <% } %>
     </div>

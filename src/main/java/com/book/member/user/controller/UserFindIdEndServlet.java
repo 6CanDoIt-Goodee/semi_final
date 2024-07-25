@@ -27,9 +27,7 @@ public class UserFindIdEndServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        System.out.println(name);
-        System.out.println(email);
-        // 세션에서 인증 코드 가져오기
+        
         HttpSession session = request.getSession();
         String sessionCode = (String) session.getAttribute("verificationCode");
         String inputCode = request.getParameter("email_number");
